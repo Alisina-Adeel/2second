@@ -90,11 +90,17 @@ body {
   border: none;
   cursor: pointer;
 }
+.card button:hover {
+  background-color: orange; 
+  cursor: pointer;          
+  transition: 0.3s;         
+}
 
 
 .form-section {
   border: #111 3px;
-  border-style:dotted;
+  border-style:solid;
+  border-color: orange;
   display: flex;
   justify-content: center;
   margin: 40px;
@@ -121,9 +127,16 @@ textarea:focus {
 
 
 form button {
-  padding: 10px;
+  padding: 10px; 
+  margin: 10px;
   background: black;
   color: white;
   border: none;
   cursor: pointer;
+}
+
+form button:hover {
+  background-color: orange; 
+  cursor: pointer;          
+  transition: 0.3s;         
 }

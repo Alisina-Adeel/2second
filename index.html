@@ -10,29 +10,25 @@
 
 <nav class="navbar">
   <div class="logo">Adeel</div>
+  <input type="text" id="searchInput" placeholder="Search Projects...">
   
   <ul class="nav-links">
     <li><a href="#">Home</a></li>
     <li><a href="#">Projects</a></li>
     <li><a href="#">About</a></li>
     <li><a href="#">Contact</a></li>
-  </ul>
-</nav>
-<section class="card-section">
-  <article class="card">
-    <div class="card-image">
-      <span class="badge">Toronto Downtown</span>
-      <img src="toronto.jpg" alt="Down town view">
-    </div>
-    <div class="card-content">
-      <h2>Toronto Photo</h2>
-      <p>If you click in this photo you will see a lanscape view of Downtown Toronto</p>
-      <a href="toronto.jpg"><button>View Photo</button></a>
-      
-    </div>
     
-  </article>
+  </ul>
+  
+</nav>
+
+<section class="card-section" id="cardContainer">
+  <!-- Cards will be added here using JavaScript -->
 </section>
+
+
+
+
 <section class="form-section">
   <form>
     <h2>Contact Us</h2>
@@ -56,6 +52,85 @@
     <button type="submit">Send</button>
   </form>
 </section>
+
+<script>
+
+  const cards = [
+    {
+      title: "Toronto Photo",
+      description: "Click to see a landscape view of Downtown Toronto",
+      image: "toronto.jpg",
+      badge: "Toronto Downtown"
+    },
+    {
+      title: "University",
+      description: "University project",
+      image: "1.jpg",
+      badge: "Final Thesis"
+    },
+    {
+      title: "Database",
+      description: "Hospital data base",
+      image: "2.jpg",
+      badge: "Haspital Data"
+    },
+    {
+      title: "GM Gym",
+      description: "Project for GM Gym in Canada",
+      image: "3.jpg",
+      badge: "GM Project"
+    }
+  ];
+
+  const container = document.getElementById('cardContainer');
+  const searchInput = document.getElementById('searchInput');
+
+  function renderCards(data) {
+    container.innerHTML = "";
+
+    if (data.length === 0) {
+      container.innerHTML = "<p>No results found</p>";
+      return;
+    }
+
+    data.forEach(card => {
+      const cardHTML = `
+        <article class="card">
+          <div class="card-image">
+            <span class="badge">${card.badge}</span>
+            <img src="${card.image}" alt="${card.title}">
+          </div>
+          <div class="card-content">
+            <h2>${card.title}</h2>
+            <p>${card.description}</p>
+            <a href="${card.image}">
+              <button>View Photo</button>
+            </a>
+          </div>
+        </article>
+      `;
+
+      container.innerHTML += cardHTML;
+    });
+  }
+
+ 
+  renderCards(cards);
+
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+
+    const filteredCards = cards.filter(card => 
+      card.title.toLowerCase().includes(query) ||
+      card.description.toLowerCase().includes(query) ||
+      card.badge.toLowerCase().includes(query)
+    );
+
+    renderCards(filteredCards);
+  });
+
+</script>
 
 </body>
 </html>
